@@ -9,7 +9,7 @@ function App() {
     <div className={styles.App}>
       <NavBar />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route exact path='/' element={<Home />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </div>
