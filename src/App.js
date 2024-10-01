@@ -13,7 +13,6 @@ function App() {
       <Routes>
         <Route exact path='/home' element={<Home />} />
         <Route path='*' element={<PageNotFound />} />
-        <Route path='/signup' element={<SignUpForm />} />
       </Routes>
     </div>
   );
