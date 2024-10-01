@@ -3,6 +3,8 @@ import NavBar from './components/NavBar';
 import {Routes, Route} from 'react-router-dom'
 import Home from './pages/home/Home';
 import PageNotFound from './pages/pagenotfound/PageNotFound';
+import './api/axiosDefaults';
+import SignUpForm from './pages/auth/SignUpForm';
 
 function App() {
   return (
@@ -11,6 +13,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='*' element={<PageNotFound />} />
+        <Route path='/signup/' element={<SignUpForm />} />
       </Routes>
     </div>
   );
