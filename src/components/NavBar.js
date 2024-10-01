@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../assets/logo-thing.png'
 
+
 function Navigation() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
