@@ -5,6 +5,7 @@ import Home from './pages/home/Home';
 import PageNotFound from './pages/pagenotfound/PageNotFound';
 import './api/axiosDefaults';
 import SignUpForm from './pages/auth/SignUpForm';
+import SignInForm from './pages/auth/SignInForm';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path='/home' element={<Home />} />
         <Route path='*' element={<PageNotFound />} />
         <Route path='/signup' element={<SignUpForm />} />
+        <Route path='/signin' element={<SignInForm />} />
       </Routes>
     </div>
   );

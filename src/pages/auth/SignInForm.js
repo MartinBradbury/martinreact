@@ -14,29 +14,31 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
-const SignUpForm = () => {
-  const [signUpData, setSignUpData] = useState({
+const SignInForm = () => {
+  const [signInData, setSignInData] = useState({
     username: "",
-    password1: "",
-    password2: "",
+    password: "",
   });
-  const { username, password1, password2 } = signUpData;
+  const { username, password } = signInData;
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
-    setSignUpData({
-      ...signUpData,
+    setSignInData({
+      ...signInData,
       [event.target.name]: event.target.value,
     });
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/registration/", signUpData);
+      console.log('Sending request:', signInData);
+      const response = await axios.post("/dj-rest-auth/login/", signInData,);
+      console.log('Response received:', response.data);
       navigate("/home");
     } catch (err) {
-      setErrors(err.response?.data);
+      console.error('Error occurred:', err.response?.data || err.message);
+      setErrors(err.response?.data || {});
     }
   };
 
@@ -62,34 +64,18 @@ const SignUpForm = () => {
                 {message}
               </Alert>
             ))}
-            <Form.Group controlId="password1">
+            <Form.Group controlId="password">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
                 className={styles.Input}
                 type="password"
                 placeholder="Password"
-                name="password1"
-                value={password1}
+                name="password"
+                value={password}
                 onChange={handleChange}
               />
             </Form.Group>
             {errors.password1?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
-            <Form.Group controlId="password2">
-              <Form.Label className="d-none">Password</Form.Label>
-              <Form.Control
-                className={styles.Input}
-                type="password"
-                placeholder="Confirm Password"
-                name="password2"
-                value={password2}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            {errors.password2?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
                 {message}
               </Alert>
@@ -126,4 +112,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
