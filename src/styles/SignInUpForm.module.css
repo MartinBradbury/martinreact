@@ -10,6 +10,9 @@
     text-align: center;
     padding: 10px;
   }
+  h1{
+    padding-left:50px;
+  }
   
   .Header {
     font-style: normal;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -13,6 +13,9 @@ import {
   Alert,
 } from "react-bootstrap";
 import axios from "axios";
+import { setCurrentUserContext } from "../../App";
+
+
 
 const SignInForm = () => {
   const [signInData, setSignInData] = useState({
@@ -22,6 +25,8 @@ const SignInForm = () => {
   const { username, password } = signInData;
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const setCurrentUser = useContext(setCurrentUserContext)
+  
 
   const handleChange = (event) => {
     setSignInData({
@@ -33,8 +38,9 @@ const SignInForm = () => {
     event.preventDefault();
     try {
       console.log('Sending request:', signInData);
-      const response = await axios.post("/dj-rest-auth/login/", signInData,);
-      console.log('Response received:', response.data);
+      const {data} = await axios.post("/dj-rest-auth/login/", signInData,);
+      console.log('Response received:', data);
+      setCurrentUser(data.user);
       navigate("/home");
     } catch (err) {
       console.error('Error occurred:', err.response?.data || err.message);
